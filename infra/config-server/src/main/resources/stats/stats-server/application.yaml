@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/statDB
+    username: root
+    password: root
+  sql.init.mode: always
+
+server.port: 9090
+
+logging:
+  level:
+    org.springframework:
+        orm:
+          jpa: INFO
+          jpa.JpaTransactionManager: INFO
+        transaction:
+          TransactionInterceptor: INFO
