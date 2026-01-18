@@ -14,6 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventRequestStatusUpdateResult {
+    @Builder.Default
     List<RequestDto> confirmedRequests = new ArrayList<>();
+    @Builder.Default
     List<RequestDto> rejectedRequests = new ArrayList<>();
 }
