@@ -1,0 +1,20 @@
+@namespace("ru.practicum.client.avro")
+protocol EventSimilarityProtocol {
+    import idl "Event.avdl";
+
+    /**
+    *Эта запись отражает сходство между двумя мероприятиями.
+    *Она содержит упорядоченные идентификаторы мероприятий,
+    *оценку сходства и метку времени.
+    *
+    *Значения поля eventA в лексикографическом порядке всегда должно идти
+    *перед значением поля eventB
+    */
+
+    record EventSimilarityAvro {
+        long eventA;
+        long eventB;
+        double score;
+        timestamp_ms timestamp;
+    }
+}
