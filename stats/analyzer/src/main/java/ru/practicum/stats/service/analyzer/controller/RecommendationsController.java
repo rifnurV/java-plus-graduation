@@ -4,7 +4,7 @@ import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
-import ru.practicum.client.RecommentationsControllerGrpc;
+import ru.practicum.client.RecommendationsControllerGrpc;
 import ru.practicum.ewm.stats.proto.*;
 import ru.practicum.stats.service.analyzer.service.RecommendationService;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @Slf4j
 @GrpcService
 @RequiredArgsConstructor
-public class RecommendationsController extends RecommentationsControllerGrpc.RecommentationsControllerImplBase {
+public class RecommendationsController extends RecommendationsControllerGrpc.RecommendationsControllerImplBase {
 
     private final RecommendationService recommendationService;
 
@@ -35,6 +35,7 @@ public class RecommendationsController extends RecommentationsControllerGrpc.Rec
         responseObserver.onCompleted();
     }
 
+    @Override
     public void getInteractionsCount(InteractionsCountRequestProto request, StreamObserver<RecommendedEventProto> responseObserver) {
         recommendationService.getInteractionsCount(request)
                 .forEach(responseObserver::onNext);

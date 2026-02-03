@@ -11,7 +11,7 @@ import java.util.List;
 public class RecommendationsClient {
 
     @GrpcClient("analyzer")
-    private RecommentationsControllerGrpc.RecommentationsControllerBlockingStub recommendationsController;
+    private RecommendationsControllerGrpc.RecommendationsControllerBlockingStub recommendationsController;
 
     /**
      * Рекомендации для пользователя

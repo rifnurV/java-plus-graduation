@@ -9,7 +9,7 @@ import "stats/messages/recomended_event.proto";
 
 option java_package = "ru.practicum.client";
 
-service RecommentationsController {
+service RecommendationsController {
     rpc getRecommendationsForUser (stats.message.UserRecommendationsRequestProto)
         returns (stream stats.message.RecommendedEventProto);
 
