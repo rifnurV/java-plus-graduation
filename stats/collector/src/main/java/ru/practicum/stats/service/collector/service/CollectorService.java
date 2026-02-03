@@ -1,6 +1,6 @@
 package ru.practicum.stats.service.collector.service;
 
-import ru.practicum.recommendations.messages.UserActionProto;
+import ru.practicum.ewm.stats.proto.UserActionProto;
 
 public interface CollectorService {
 

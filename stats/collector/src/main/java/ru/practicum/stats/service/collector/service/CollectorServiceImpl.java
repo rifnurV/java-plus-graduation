@@ -6,8 +6,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import ru.practicum.ewm.stats.avro.ActionTypeAvro;
 import ru.practicum.ewm.stats.avro.UserActionAvro;
-import ru.practicum.recommendations.messages.ActionTypeProto;
-import ru.practicum.recommendations.messages.UserActionProto;
+import ru.practicum.ewm.stats.proto.ActionTypeProto;
+import ru.practicum.ewm.stats.proto.UserActionProto;
 import ru.practicum.stats.service.collector.configuration.KafkaTopics;
 
 import java.time.Instant;

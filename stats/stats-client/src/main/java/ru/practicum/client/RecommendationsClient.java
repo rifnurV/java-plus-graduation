@@ -3,11 +3,7 @@ package ru.practicum.client;
 import com.google.common.collect.Lists;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Component;
-import ru.practicum.recommendations.messages.InteractionsCountRequest;
-import ru.practicum.recommendations.messages.RecommendedEvent;
-import ru.practicum.recommendations.messages.SimilarEventsRequest;
-import ru.practicum.recommendations.messages.UserPredictionsRequest;
-import ru.practicum.recommendations.services.RecommendationsControllerGrpc;
+import ru.practicum.ewm.stats.proto.*;
 
 import java.util.List;
 
@@ -15,14 +11,14 @@ import java.util.List;
 public class RecommendationsClient {
 
     @GrpcClient("analyzer")
-    private RecommendationsControllerGrpc.RecommendationsControllerBlockingStub recommendationsController;
+    private RecommentationsControllerGrpc.RecommentationsControllerBlockingStub recommendationsController;
 
     /**
      * Рекомендации для пользователя
      * @param userPredictionsRequest
      * @return
      */
-    public List<RecommendedEvent> getRecommendedEventsForUser(UserPredictionsRequest userPredictionsRequest) {
+    public List<RecommendedEventProto> getRecommendedEventsForUser(UserRecommendationsRequestProto userPredictionsRequest) {
         return Lists.newArrayList(recommendationsController.getRecommendationsForUser(userPredictionsRequest));
     }
 
@@ -31,7 +27,7 @@ public class RecommendationsClient {
      * @param similarEventsRequest
      * @return
      */
-    public List<RecommendedEvent> getSimilarEvents(SimilarEventsRequest similarEventsRequest) {
+    public List<RecommendedEventProto> getSimilarEvents(SimilarEventsRequestProto similarEventsRequest) {
         return Lists.newArrayList(recommendationsController.getSimilarEvents(similarEventsRequest));
     }
 
@@ -40,7 +36,7 @@ public class RecommendationsClient {
      * @param interactionsCountRequest
      * @return
      */
-    public List<RecommendedEvent> getInteractionsCount(InteractionsCountRequest interactionsCountRequest) {
+    public List<RecommendedEventProto> getInteractionsCount(InteractionsCountRequestProto interactionsCountRequest) {
         return Lists.newArrayList(recommendationsController.getInteractionsCount(interactionsCountRequest));
     }
 }

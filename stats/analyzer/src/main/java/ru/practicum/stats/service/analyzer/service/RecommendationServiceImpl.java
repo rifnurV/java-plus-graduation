@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import ru.practicum.recommendations.messages.InteractionsCountRequest;
-import ru.practicum.recommendations.messages.RecommendedEvent;
-import ru.practicum.recommendations.messages.SimilarEventsRequest;
-import ru.practicum.recommendations.messages.UserPredictionsRequest;
+import ru.practicum.ewm.stats.proto.*;
 import ru.practicum.stats.service.analyzer.model.Interactions;
 import ru.practicum.stats.service.analyzer.model.Similarities;
 import ru.practicum.stats.service.analyzer.repository.InteractionsRepository;
@@ -25,7 +22,7 @@ public class RecommendationServiceImpl implements RecommendationService {
     private final InteractionsRepository interactionsRepository;
 
     @Override
-    public List<RecommendedEvent> findSimilarEvents(SimilarEventsRequest request) {
+    public List<RecommendedEventProto> findSimilarEvents(SimilarEventsRequestProto request) {
         long userId = request.getUserId();
         long eventId = request.getEventId();
         long maxResults = request.getMaxResults();
@@ -45,7 +42,7 @@ public class RecommendationServiceImpl implements RecommendationService {
     }
 
     @Override
-    public List<RecommendedEvent> predictForUser(UserPredictionsRequest userPredictionsRequest) {
+    public List<RecommendedEventProto> predictForUser(UserRecommendationsRequestProto userPredictionsRequest) {
         long userId = userPredictionsRequest.getUserId();
         long maxResults = userPredictionsRequest.getMaxResults();
         // Получаем последние N взаимодействий пользователя
@@ -73,7 +70,7 @@ public class RecommendationServiceImpl implements RecommendationService {
                     double predictedScore = calculatePredictedScore(targetEventId, userId);
                     return createRecommendedEvent(targetEventId, predictedScore);
                 })
-                .sorted(Comparator.comparing(RecommendedEvent::getScore).reversed())
+                .sorted(Comparator.comparing(RecommendedEventProto::getScore).reversed())
                 .limit(maxResults)
                 .toList();
     }
@@ -97,7 +94,7 @@ public class RecommendationServiceImpl implements RecommendationService {
     }
 
     @Override
-    public List<RecommendedEvent> getInteractionsCount(InteractionsCountRequest interactionsCountRequest) {
+    public List<RecommendedEventProto> getInteractionsCount(InteractionsCountRequestProto interactionsCountRequest) {
         return interactionsCountRequest.getEventIdsList().stream()
                 .map(id -> {
                     Double totalWeight = interactionsRepository.sumRatingsByEventId(id);
@@ -110,8 +107,8 @@ public class RecommendationServiceImpl implements RecommendationService {
         return sim.getEvent1() == currentId ? sim.getEvent2() : sim.getEvent1();
     }
 
-    private RecommendedEvent createRecommendedEvent(long id, double score) {
-        return RecommendedEvent.newBuilder()
+    private RecommendedEventProto createRecommendedEvent(long id, double score) {
+        return RecommendedEventProto.newBuilder()
                 .setEventId(id)
                 .setScore((float) score)
                 .build();
