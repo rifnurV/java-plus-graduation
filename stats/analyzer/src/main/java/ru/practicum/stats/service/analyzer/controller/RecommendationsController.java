@@ -20,7 +20,7 @@ public class RecommendationsController extends RecommendationsControllerGrpc.Rec
     @Override
     public void getSimilarEvents(SimilarEventsRequestProto request,
                                  StreamObserver<RecommendedEventProto> responseObserver) {
-        List<RecommendedEventProto> results = recommendationService.findSimilarEvents(request);
+        List<RecommendedEventProto> results = recommendationService.getSimilarEvents(request);
 
         results.forEach(responseObserver::onNext);
         responseObserver.onCompleted();
@@ -29,7 +29,7 @@ public class RecommendationsController extends RecommendationsControllerGrpc.Rec
     @Override
     public void getRecommendationsForUser(UserRecommendationsRequestProto request,
                                           StreamObserver<RecommendedEventProto> responseObserver) {
-        List<RecommendedEventProto> results = recommendationService.predictForUser(request);
+        List<RecommendedEventProto> results = recommendationService.getPredictForUser(request);
 
         results.forEach(responseObserver::onNext);
         responseObserver.onCompleted();
