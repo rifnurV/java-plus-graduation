@@ -1,7 +1,5 @@
 package ru.practicum.stats.service.collector.service;
 
-import com.google.protobuf.Empty;
-import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;

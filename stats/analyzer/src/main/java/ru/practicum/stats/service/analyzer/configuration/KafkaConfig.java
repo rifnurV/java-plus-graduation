@@ -10,8 +10,6 @@ import ru.practicum.ewm.stats.avro.UserActionAvro;
 import ru.practicum.stats.service.analyzer.repository.InteractionsRepository;
 import ru.practicum.stats.service.analyzer.repository.SimilaritiesRepository;
 
-import static ru.practicum.ewm.stats.avro.ActionTypeAvro.*;
-
 @Component
 @Slf4j
 @RequiredArgsConstructor

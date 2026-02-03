@@ -26,9 +26,9 @@ public class RecommendationServiceImpl implements RecommendationService {
 
     @Override
     public List<RecommendedEvent> findSimilarEvents(SimilarEventsRequest request) {
-        Long userId = request.getUserId();
-        Long eventId = request.getEventId();
-        Long maxResults = request.getMaxResults();
+        long userId = request.getUserId();
+        long eventId = request.getEventId();
+        long maxResults = request.getMaxResults();
 
         // Получаем список ID мероприятий, с которыми пользователь уже взаимодействовал
         Set<Long> interactedEvents = interactionsRepository.findAllEventIdsByUserId(userId);
@@ -46,8 +46,8 @@ public class RecommendationServiceImpl implements RecommendationService {
 
     @Override
     public List<RecommendedEvent> predictForUser(UserPredictionsRequest userPredictionsRequest) {
-        Long userId = userPredictionsRequest.getUserId();
-        Long maxResults = userPredictionsRequest.getMaxResults();
+        long userId = userPredictionsRequest.getUserId();
+        long maxResults = userPredictionsRequest.getMaxResults();
         // Получаем последние N взаимодействий пользователя
         List<Interactions> lastInteractions = interactionsRepository.findLastInteractions(userId, PageRequest.of(0, 10));
         if (lastInteractions.isEmpty()) return List.of();
