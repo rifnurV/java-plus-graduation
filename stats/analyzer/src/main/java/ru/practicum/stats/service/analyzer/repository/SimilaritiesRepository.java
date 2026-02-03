@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import ru.practicum.stats.service.analyzer.model.Similarities;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface SimilaritiesRepository extends JpaRepository<Similarities, Long> {
@@ -28,7 +29,7 @@ public interface SimilaritiesRepository extends JpaRepository<Similarities, Long
             FROM Similarities es
             WHERE es.event1 = :event1 OR es.event2 = :event2
             """)
-    List<Similarities> findAllBySourceEventIdOrTargetEventId(Long event1, Long event2);
+    List<Similarities> findAllByEvent1OrEvent2(Long event1, Long event2);
 
     @Query("""
             SELECT DISTINCT es
@@ -36,4 +37,7 @@ public interface SimilaritiesRepository extends JpaRepository<Similarities, Long
             WHERE es.event1 IN :sourceEventIds OR es.event2 IN :targetEventIds
             """)
     List<Similarities> findAllBySourceEventIdInOrTargetEventIdIn(Set<Long> sourceEventIds, Set<Long> targetEventIds);
+
+
+    Optional<Similarities> findByEvent1AndEvent2(Long event1, Long event2);
 }

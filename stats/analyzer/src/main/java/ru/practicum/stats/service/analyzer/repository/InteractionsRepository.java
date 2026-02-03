@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import ru.practicum.stats.service.analyzer.model.Interactions;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface InteractionsRepository extends JpaRepository<Interactions, Long> {
 
@@ -29,4 +30,6 @@ public interface InteractionsRepository extends JpaRepository<Interactions, Long
     List<Interactions> findByEventIdIn(List<Long> eventIds);
 
     List<Interactions> findByEventId(Long eventId);
+
+    Optional<Interactions> findByUserIdAndEventId(Long userId, Long eventId);
 }

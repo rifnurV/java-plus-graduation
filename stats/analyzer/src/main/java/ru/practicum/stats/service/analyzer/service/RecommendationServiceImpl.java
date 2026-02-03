@@ -34,7 +34,7 @@ public class RecommendationServiceImpl implements RecommendationService {
 
         // Получаем список всех похожих событий
         List<Similarities> allSimilarities = similaritiesRepository
-                .findAllBySourceEventIdOrTargetEventId(eventId, eventId);
+                .findAllByEvent1OrEvent2(eventId, eventId);
 
         // Получаем список событий, которые пользователь уже просматривал
         Set<Long> viewedEvents = interactionsRepository.findByUserId(userId)
