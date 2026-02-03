@@ -1,0 +1,35 @@
+grpc:
+  server:
+    port: 0
+
+spring:
+  jpa:
+    hibernate.ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        connection:
+          read_only: false
+
+  sql.init.mode: always
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:6541/analyzer_db
+    username: root
+    password: root
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: "stats.analyzer.consumer"
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: ru.practicum.stats.kafka.deserializer.ActionTypeDeserializer
+
+# Маппинг логических имен топиков на реальные имена в Kafka
+analyzer:
+  kafka:
+    consumer:
+      topics:
+        user-actions: "stats.user-actions.v1"
+        eventsTopic: "stats.events-similarity.v1"

@@ -1,5 +1,7 @@
 package ru.practicum.stats.service.collector.service;
 
+import com.google.protobuf.Empty;
+import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -35,8 +37,8 @@ public class CollectorServiceImpl implements CollectorService {
             // 2. Асинхронная отправка в Kafka
             // Используем userId как ключ (key), чтобы события одного пользователя
             // всегда попадали в один и тот же раздел (partition) и сохраняли порядок.
-            String topic = kafkaTopics.getUserAction();
-            kafkaTemplate.send(topic, String.valueOf(avro.getUserId()), avro)
+            String topic = kafkaTopics.getUserActions();
+            kafkaTemplate.send(topic, avro)
                     .whenComplete((result, ex) -> {
                         if (ex == null) {
                             log.debug("Сообщение успешно отправлено в Kafka: {}", result.getRecordMetadata());
