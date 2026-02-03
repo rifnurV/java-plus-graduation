@@ -11,10 +11,10 @@ spring:
       discovery:
         enabled: true
         service-id: config-server
-      fail-fast: false
+      fail-fast: true
       retry:
-        useRandomPolicy: true
-        max-interval: 30000
+        initial-interval: 2000
+        max-attempts: 10
       enabled: true
     loadbalancer:
       ribbon:
