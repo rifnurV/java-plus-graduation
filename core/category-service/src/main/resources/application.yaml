@@ -11,11 +11,14 @@ spring:
       discovery:
         enabled: true
         service-id: config-server
-      fail-fast: true
+      fail-fast: false
       retry:
         useRandomPolicy: true
         max-interval: 30000
       enabled: true
+    loadbalancer:
+      ribbon:
+        enabled: false
 eureka:
   client:
     serviceUrl:
