@@ -53,8 +53,6 @@ public class EventControllerPublic {
                 .size(size)
                 .build();
 
-        eventService.sendHit(request);
-
         List<EventFullDto> events = eventService.findAllByUserParams(p);
         log.info("events={}", events);
         log.info("Возвращено {} событий", events.size());
@@ -65,7 +63,6 @@ public class EventControllerPublic {
     public ResponseEntity<EventFullDto> getEvent(@PathVariable(name = "eventId") long eventId,
                                  HttpServletRequest request) {
         log.info("Выполнен запрос получения события с id={}", eventId);
-        eventService.sendHit(request);
 
         EventFullDto eventFullDto = eventService.findPublishedEvent(eventId);
 

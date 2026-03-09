@@ -32,7 +32,7 @@ spring:
         - id: event-service
           uri: lb://event-service
           predicates:
-            - Path=/admin/compilations/**, /admin/**, /client/**, /compilations/**, /categories/**, /events/**, /users/**
+            - Path=/events/**, /admin/compilations/**, /admin/**, /client/**, /compilations/**, /categories/**, /users/**
 
         - id: stats-server
           uri: lb://stats-server

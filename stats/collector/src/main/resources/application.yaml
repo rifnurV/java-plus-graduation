@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: category-service
+    name: collector
   config:
     import: "configserver:"
   cloud:
@@ -13,12 +13,9 @@ spring:
         service-id: config-server
       fail-fast: true
       retry:
-        initial-interval: 2000
-        max-attempts: 10
+        useRandomPolicy: true
+        max-interval: 30000
       enabled: true
-    loadbalancer:
-      ribbon:
-        enabled: false
 eureka:
   client:
     serviceUrl:
